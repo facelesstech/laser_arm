@@ -55,53 +55,6 @@ void setup() {
 
 void loop(){
 
-// ----------Laser button stuff----------
-  int laserReading = digitalRead(laserButtonPin);
-
-  // check to see if you just pressed the button
-  // (i.e. the input went from LOW to HIGH),  and you've waited
-  // long enough since the last press to ignore any noise:
-
-  // If the switch changed, due to noise or pressing:
-  if (laserReading != laserLastButtonState) {
-    // reset the debouncing timer
-    laserLastDebounceTime = millis();
-  }
-
-  if ((millis() - laserLastDebounceTime) > laserDebounceDelay) {
-    // WHATEVER THE READING IS AT, IT'S BEEN THERE FOR LONGER
-    // than the debounce delay, so take it as the actual current state:
-
-    // if the button state has changed:
-    if (laserReading != laserButtonState) {
-      laserButtonState = laserReading;
-
-      // only toggle the LED if the new button state is HIGH
-      if (laserButtonState == LOW) {
-        laserState = !laserState;
-//        Serial.println("laser button press");
-      }
-    }
-  }
-
-  // set the LED:
-  digitalWrite(laserPin, laserState);
-
-  // save the reading.  Next time through the loop,
-  // it'll be the lastButtonState:
-  laserLastButtonState = laserReading;
-// --------- Laser button end ---------
-
-//    int moveTo = 100;  
-//      for(int i=0; i<=360; i++){
-//    myservo2.write(i); // sets the servo position according to the scaled value    
-//    for(int move=0; move>=moveTo; move++)
-//    {
-
-//    servoVal2 = map(analogRead(joyH), 0, 1023, 50, 180); // scale it to use it with the servo (result  between 0 and 180)
-//      Serial.println(move);
-//    while (move <= moveTo)
-//    while (move <= randomServo2)
     while (true)
     { 
       randomServo1 = random(servo1MinLimit, servo1MaxLimit);
@@ -112,42 +65,16 @@ void loop(){
       Serial.println(savedRandom2);
       Serial.print("move2 - ");
       Serial.println(move2);
-//        if (move2 >= randomServo2)
-//        {
-//        move2--;
-//      myservo2.write(move2); // sets the servo position according to the scaled value    
-//      delay(100); // waits for the servo to get there
-//        }
-//
-//        if (move2 <= randomServo2)
-//        {
-//        move2++;
-//      myservo2.write(move2); // sets the servo position according to the scaled value    
-//      delay(100); // waits for the servo to get there
-//        }
       if (move2 == servo2MaxLimit)
       {
-//        move2--;
-//      move2 = 30;
       randomServo2 = random(servo2MinLimit, servo2MaxLimit);
       move2 = randomServo2;
       savedRandom2 = randomServo2;
       Serial.println("over 100 ");
-
       }
-//      }
-//    if (move2 == randomServo2)
-//    if (move2 == savedRandom2)
-//    {
-//      randomServo2 = random(servo2MinLimit, servo2MaxLimit);
-//      move2 = randomServo2;
-//      Serial.println("meet move2");
-//    }
 
 // Bottom servo aka servo 1
 
-
-//      move++;
       if (move == servo1MaxLimit)
       {
         sweep = 1;
@@ -170,23 +97,6 @@ void loop(){
         myservo1.write(move); // sets the servo position according to the scaled value    
       }
 
-
-//      move++;
-//      myservo1.write(move); // sets the servo position according to the scaled value    
-//      if (move == 120)
-//      {
-//      move = randomServo1;
-//
-//      }
-//    if (move == randomServo1)
-//    {
-//      move = randomServo1;
-//    }
-//
-//      Serial.print("random Servo 1 - ");
-//      Serial.println(randomServo1);
-//      Serial.print("move - ");
-//      Serial.println(move);
       delay(15); // waits for the servo to get there
     }
 
